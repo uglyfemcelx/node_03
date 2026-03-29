@@ -10,7 +10,6 @@ body{
     color:#00ff88;
     font-family:"Courier New", monospace;
     padding:40px;
-    overflow-x:hidden;
     overflow-y:auto; /* FIXED SCROLL */
 }
 
@@ -29,6 +28,17 @@ body{
     cursor:pointer;
 }
 
+#ghostImage{
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    max-width:300px;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity 0.3s;
+}
+
 @keyframes flicker{
     0%{opacity:1;}
     50%{opacity:0.2;}
@@ -40,6 +50,9 @@ body{
 <body>
 
 <div id="text"></div>
+
+<!-- RANDOM IMAGE -->
+<img id="ghostImage" src="https://i.pinimg.com/originals/f1/25/20/f12520f36a9b98f6e897f0705fd0d373.gif">
 
 <script>
 const story = [
@@ -148,69 +161,15 @@ const story = [
 let i = 0;
 const text = document.getElementById("text");
 
-// ----------- GLITCH SYSTEM -----------
-
-function glitchLine(line){
-    if(Math.random() < 0.08){
-        return "> ███ ERROR ███ MEMORY CORRUPTED ███";
-    }
-    return line;
-}
-
-function corruptText(str){
-    const chars = "!@#$%^&*()_+=-{}[]<>?/|";
-    return str.split("").map(c=>{
-        if(Math.random() < 0.05){
-            return chars[Math.floor(Math.random()*chars.length)];
-        }
-        return c;
-    }).join("");
-}
-
-function processLine(line){
-    if(line.toLowerCase().includes("alice")){
-        return line.replace(/alice/gi, ()=>{
-            return Math.random() < 0.5
-                ? "<span class='glitch'>a̸l̸i̸c̸e̸</span>"
-                : "alice";
-        });
-    }
-    return line;
-}
-
-// ----------- TYPING -----------
-
 function type(){
     if(i < story.length){
-
-        let line = story[i];
-
-        line = glitchLine(line);
-        line = processLine(line);
-        line = corruptText(line);
-
-        text.innerHTML += line + "\n";
+        text.innerHTML += story[i] + "\n";
         i++;
-
-        // auto scroll
-        window.scrollTo(0, document.body.scrollHeight);
-
-        // random intrusive message
-        if(Math.random() < 0.05){
-            const intrude = document.createElement("div");
-            intrude.classList.add("glitch");
-            intrude.textContent = "> why did you erase yourself?";
-            text.appendChild(intrude);
-        }
-
         setTimeout(type, 120);
-
     } else {
         spawnSecret();
     }
 }
-
-// ----------- SECRET NODE -----------
 
 function spawnSecret(){
     const secret = document.createElement("div");
@@ -223,6 +182,25 @@ function spawnSecret(){
         window.location.href = "node4.html";
     });
 }
+
+/* ------------------ RANDOM IMAGE APPEAR ------------------ */
+const ghost = document.getElementById("ghostImage");
+
+function randomFlash(){
+    const delay = Math.random() * 8000 + 4000; // 4–12 sec random
+
+    setTimeout(()=>{
+        ghost.style.opacity = "1";
+
+        setTimeout(()=>{
+            ghost.style.opacity = "0";
+            randomFlash(); // loop forever
+        }, 400); // visible time
+    }, delay);
+}
+
+randomFlash();
+/* -------------------------------------------------------- */
 
 type();
 </script>
