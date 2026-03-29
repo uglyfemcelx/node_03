@@ -12,7 +12,7 @@ body{
     font-family:"Courier New", monospace;
     padding:40px;
     overflow-x:hidden;
-    overflow-y:auto; /* FIXED SCROLL */
+    overflow-y:auto; 
 }
 
 #text{
@@ -54,7 +54,7 @@ body{
 
 <div id="text"></div>
 
-<!-- RANDOM IMAGE -->
+<!-- random image -->
 <img id="ghostImage" src="https://i.pinimg.com/originals/f1/25/20/f12520f36a9b98f6e897f0705fd0d373.gif">
 
 
@@ -165,7 +165,7 @@ const story = [
 let i = 0;
 const text = document.getElementById("text");
 
-// ----------- GLITCH SYSTEM -----------
+// glitch system
 
 function glitchLine(line){
     if(Math.random() < 0.08){
@@ -195,7 +195,7 @@ function processLine(line){
     return line;
 }
 
-// ----------- TYPING -----------
+// typetypetyping
 
 function type(){
     if(i < story.length){
@@ -227,7 +227,7 @@ function type(){
     }
 }
 
-// ----------- SECRET NODE -----------
+// secret node shhhh
 
 function spawnSecret(){
     const secret = document.createElement("div");
@@ -255,7 +255,7 @@ setTimeout(()=>follow.remove(),500)
 }
 })
 
-/* ------------------ RANDOM IMAGE APPEAR ------------------ */
+/* random image appear */
 const ghost = document.getElementById("ghostImage");
 
 function randomFlash(){
