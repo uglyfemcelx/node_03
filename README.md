@@ -241,6 +241,20 @@ function spawnSecret(){
     });
 }
 
+// CURSOR FOLLOW (FIXED)
+document.addEventListener("mousemove", function(e){
+if(Math.random() < 0.01){
+let follow = document.createElement("div")
+follow.innerText = "do you remember me?"
+follow.style.position="absolute"
+follow.style.left = e.pageX + "px"
+follow.style.top = e.pageY + "px"
+follow.style.opacity="0.5"
+document.body.appendChild(follow)
+setTimeout(()=>follow.remove(),500)
+}
+})
+
 /* ------------------ RANDOM IMAGE APPEAR ------------------ */
 const ghost = document.getElementById("ghostImage");
 
