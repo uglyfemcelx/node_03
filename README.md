@@ -237,7 +237,7 @@ function spawnSecret(){
     text.appendChild(secret);
 
     secret.addEventListener("click", ()=>{
-        window.location.href = "node4.html";
+        window.location.href = "https://uglyfemcelx.github.io/node_04/";
     });
 }
 
